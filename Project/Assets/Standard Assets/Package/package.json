@@ -1,0 +1,13 @@
+{
+	"name": "com.unity.example",
+	"version": "0.0.0",
+	"displayName": "<NAME>",
+	"description": "<DESCRIPTION>",
+	"samples": [
+		{
+			"displayName": "Example Sample",
+			"description": "Example Sample folder",
+			"path": "Samples/Example Sample"
+		}
+	]
+}
