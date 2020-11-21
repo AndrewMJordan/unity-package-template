@@ -1,37 +1,53 @@
-name: $(BuildID)
+# UPM Package Deployment
+# Author:   AndrewMJordan
+# Version:  1.0.0
 
-variables:
-  projectPath: "$(Agent.BuildDirectory)/$(Custom.ProjectRoot)"
-  packagePath: "$(Agent.BuildDirectory)/$(Custom.PackageRoot)"
-  licenseHeader: "$(Custom.LicenseText)"
+name: $(BuildID)
 
 trigger:
   - master
 pr: none
+
+pool:
+  vmImage: 'windows-latest'
   
 stages:
 - stage: deploy
   displayName: "Deployment Stage"
   jobs:
-  - job: deploy.1
+  - job: deploy1
     displayName: "Publish UPM Package Contents"
     steps:
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'custom'
-        custom: 'tool'
-        arguments: 'install --global Gooball'
-      displayName: 'Install Unity CLI tool'
+    - checkout: self
+      persistCredentials: true
     - bash: |
-        find . -type f -name "$(packagePath)/*.cs" | xargs -I {} sh -c "echo '$(licenseHeader)' | goo transform inject {}"
-        find . -type f -name "$(packagePath)/*.shader" | xargs -I {} sh -c "echo '$(licenseHeader)' | goo transform inject {}"
-        goo transform hide-folder "$(packagePath)/Samples"
-        goo package ignore-folder "$(packagePath)" "Samples"
+        dotnet tool install --global Gooball
+      displayName: 'Install Unity CLI'
+    - bash: |
+        git config user.name "Azure Pipelines"
+        git config user.email "<>"
+      displayName: 'Configure version control'
+    - bash: |
+        cd "$(Build.SourcesDirectory)"
+
+        find "$(Custom.PackageRoot)" \( -iname "*.cs" -o -iname "*.shader" \) | while read fname; do
+          cat "preamble.txt" | goo transform inject "${fname}"
+        done
+
+        goo transform hide-folder "$(Custom.PackageRoot)/Samples"
+        goo package ignore-folder "$(Custom.PackageRoot)" "Samples"
       displayName: 'Preprocess files'
     - bash: |
-        git subtree split -P "$(packagePath)" -b upm
-        git push origin upm
+        temp="$(Agent.TempDirectory)/package"
+        cp -r "$(Custom.PackageRoot)"/. "${temp}"/
 
-        ver=`goo package get-version '$(packagePath)'
-        git tag upm -a "Release tag by Azure Pipelines" -m "$ver"
+        git checkout -f upm && git clean -df
+        git rm -r *
+        mv "${temp}"/* "$(Build.SourcesDirectory)"
+      displayName: 'Prepare package file structure'
+    - bash: |
+        git add -A
+        git commit -m "[skip cip] Deployed by Azure Pipelines"
+
+        git push -f origin upm
       displayName: 'Push package branch'
