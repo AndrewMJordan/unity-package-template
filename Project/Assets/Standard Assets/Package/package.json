@@ -1,13 +1,27 @@
 {
-	"name": "com.unity.example",
-	"version": "0.0.0",
-	"displayName": "<NAME>",
+	"name": "com.unity.<NAME>",
+	"version": "1.0.0",
+	"displayName": "<DISPLAY_NAME>",
 	"description": "<DESCRIPTION>",
+	"dependencies": {
+		"com.unity.some-package": "1.0.0",
+		"com.unity.other-package": "2.0.0"
+	},
+	"keywords": [
+		"keyword1",
+		"keyword2",
+		"keyword3"
+	],
+	"author": {
+		"name": "Unity",
+		"email": "unity@example.com",
+		"url": "https://www.unity3d.com"
+	},
 	"samples": [
 		{
-			"displayName": "Example Sample",
-			"description": "Example Sample folder",
-			"path": "Samples/Example Sample"
+			"displayName": "<DISPLAY_NAME>",
+			"description": "<DESCRIPTION>",
+			"path": "Samples/<SAMPLE>"
 		}
 	]
 }
