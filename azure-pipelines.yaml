@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.5
+# Version:  1.0.6
 
 name: $(BuildID)
 
@@ -38,7 +38,7 @@ stages:
         goo package ignore-folder "$(Custom.PackageRoot)" "Samples"
       displayName: 'Preprocess package files'
     - bash: |
-        cd $"(Build.SourcesDirectory)"
+        cd "$(Build.SourcesDirectory)"
         version=`goo package get-version $(Custom.PackageRoot)`
 
         temp="$(Agent.TempDirectory)/package"
