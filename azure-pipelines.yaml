@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.3
+# Version:  1.0.4
 
 name: $(BuildID)
 
@@ -53,5 +53,5 @@ stages:
         git commit -m "Deployed ${version} by Azure Pipelines"
         git tag -a -m "Release tag by Azure Pipelines" "${version}"
 
-        git push -f origin upm && git push origin --tags
+        git push origin upm && git push origin --tags
       displayName: 'Push with package structure'
