@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.1
+# Version:  1.0.2
 
 name: $(BuildID)
 
@@ -41,7 +41,7 @@ stages:
         temp="$(Agent.TempDirectory)/package"
         cp -r "$(Custom.PackageRoot)"/. "${temp}"/
 
-        git checkout -b upm && git clean -df
+        git checkout -fb upm && git clean -df
         git rm -r *
         mv "${temp}"/* "$(Build.SourcesDirectory)"
       displayName: 'Prepare package file structure'
