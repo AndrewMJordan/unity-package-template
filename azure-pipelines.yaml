@@ -39,7 +39,7 @@ stages:
       displayName: 'Preprocess package files'
     - bash: |
         cd "$(Build.SourcesDirectory)"
-        version=`goo package get-version $(Custom.PackageRoot)`
+        version=`goo package get-version "$(Custom.PackageRoot)"`
 
         temp="$(Agent.TempDirectory)/package"
         cp -r "$(Custom.PackageRoot)"/. "${temp}"/
