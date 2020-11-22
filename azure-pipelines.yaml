@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.4
+# Version:  1.0.5
 
 name: $(BuildID)
 
@@ -39,15 +39,14 @@ stages:
       displayName: 'Preprocess package files'
     - bash: |
         cd $"(Build.SourcesDirectory)"
+        version=`goo package get-version $(Custom.PackageRoot)`
 
         temp="$(Agent.TempDirectory)/package"
         cp -r "$(Custom.PackageRoot)"/. "${temp}"/
 
-        git checkout -fb upm && git clean -df
-        git rm -r *
+        git checkout -f upm 2> /dev/null || (git checkout -fb upm)
+        git clean -df && git rm -r *
         mv "${temp}"/* .
-
-        version=`goo package get-version .`
 
         git add -A
         git commit -m "Deployed ${version} by Azure Pipelines"
