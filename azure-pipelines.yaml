@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.6
+# Version:  1.0.7
 
 name: $(BuildID)
 
