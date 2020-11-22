@@ -1,6 +1,6 @@
 # UPM Package Deployment
 # Author:   AndrewMJordan
-# Version:  1.0.2
+# Version:  1.0.3
 
 name: $(BuildID)
 
@@ -36,18 +36,22 @@ stages:
 
         goo transform hide-folder "$(Custom.PackageRoot)/Samples"
         goo package ignore-folder "$(Custom.PackageRoot)" "Samples"
-      displayName: 'Preprocess files'
+      displayName: 'Preprocess package files'
     - bash: |
+        cd $"(Build.SourcesDirectory)"
+
         temp="$(Agent.TempDirectory)/package"
         cp -r "$(Custom.PackageRoot)"/. "${temp}"/
 
         git checkout -fb upm && git clean -df
         git rm -r *
-        mv "${temp}"/* "$(Build.SourcesDirectory)"
-      displayName: 'Prepare package file structure'
-    - bash: |
-        git add -A
-        git commit -m "[skip cip] Deployed by Azure Pipelines"
+        mv "${temp}"/* .
 
-        git push -f origin upm
-      displayName: 'Push package branch'
+        version=`goo package get-version .`
+
+        git add -A
+        git commit -m "Deployed ${version} by Azure Pipelines"
+        git tag -a -m "Release tag by Azure Pipelines" "${version}"
+
+        git push -f origin upm && git push origin --tags
+      displayName: 'Push with package structure'
