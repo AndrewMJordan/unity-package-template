@@ -13,12 +13,13 @@ Template repository for custom Unity package development.
 2. Follow the generate repository screen.
 	- OPTIONAL: check "Include all branches" to include the recommended branching workflow.
 3. Clone the project to your workstation.
-4. Edit the file `./README.md` with your package's details.
-5. Edit the file `./Project/Assets/Standard Assets/Package/package.json` with your package's details.
-6. Edit the file `./Project/Assets/Standard Assets/Package/README.md` with your package's details.
-7. Edit the header text in `./preamble.txt`.
-8. Rename the project folder to your package's name.
-9. Rename the package folder to your package's name.
+4. Edit the file `./LICENSE.md` with your authoring details.
+5. Edit the file `./preamble.txt` with your authoring details.
+6. Edit the file `./README.md` with your package's details.
+7. Rename the project folder to your package's name.
+8. Rename the package folder to your package's name.
+9. Edit the file `./Project/Assets/Standard Assets/Package/package.json` with your package's details.
+10. Edit the file `./Project/Assets/Standard Assets/Package/README.md` with your package's details.
 
 ### Azure DevOps
 1. Create a new pipeline in Azure Pipelines.
