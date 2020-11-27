@@ -46,3 +46,7 @@ Assets/StreamingAssets/crashlytics-build.properties
 
 # MacOS system files
 **/.DS_Store
+
+# Paid assets
+Assets/Standard Assets/
+Assets/Standard Assets.meta
