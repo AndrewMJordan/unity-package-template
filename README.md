@@ -21,7 +21,15 @@ Template repository for custom Unity package development.
 9. Edit the file `./Project/Assets/Package/package.json` with your package's details.
 10. Edit the file `./Project/Assets/Package/README.md` with your package's details.
 
-### Azure DevOps
+
+
+### Deployment
+#### Manually Deploy from the Command Line
+1. Run `deploy.sh` with the path to your package as an argument.
+```shell
+./deploy.sh "Project/Assets/Package"
+```
+#### CI/CD with Azure DevOps
 1. Create a new pipeline in Azure Pipelines.
 2. Create a pipeline variable named `Custom.PackageRoot`.
 	- The value should be the relative path to your package. (Ex. `Project/Assets/Package`)
