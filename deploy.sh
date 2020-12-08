@@ -2,7 +2,7 @@
 
 # Deploy UPM branch
 # Author:	AndrewMJordan
-# Version:	1.0.0
+# Version:	1.0.1
 
 # Validate parameters
 if [ -z "$1" ]
@@ -40,3 +40,6 @@ git tag -a -m "Release tag" "$version"
 
 # Push
 git push origin upm && git push origin --tags
+
+# Restore working tree
+git checkout -f develop && git clean -fdx
