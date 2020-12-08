@@ -2,7 +2,7 @@
 
 # Deploy UPM branch
 # Author:	AndrewMJordan
-# Version:	1.0.1
+# Version:	1.0.2
 
 # Validate parameters
 if [ -z "$1" ]
@@ -26,6 +26,7 @@ tmp_dir=$(mktemp -d -t deploy-XXXX)
 cp -r "$packageRoot"/. "$tmp_dir"/
 
 # Prepare working tree for upm branch
+git branch -D upm 2> /dev/null
 git checkout -f upm 2> /dev/null || (git checkout -fb upm)
 git clean -fd && git rm -r *
 # Restore package files
