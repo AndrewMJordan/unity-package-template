@@ -13,7 +13,7 @@ Template repository for custom Unity package development.
 2. Follow the generate repository screen.
 	- OPTIONAL: check "Include all branches" to include the recommended branching workflow.
 3. Clone the project to your workstation.
-4. Edit the file `./LICENSE.md` with your authoring details.
+4. Edit the file `./LICENSE` with your authoring details.
 5. Edit the file `./preamble.txt` with your authoring details.
 6. Edit the file `./README.md` with your package's details.
 7. Rename the project folder to your package's name.
