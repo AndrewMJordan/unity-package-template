@@ -18,3 +18,7 @@ Template repository for custom Unity package development.
 1. Clone the project to your workstation.
 2. Run `init.sh` to setup the Unity project.
 3. Edit the package manifest with your package's details. (Ex. `Project/Assets/Package/project.json`).
+
+### GitHub Actions Setup
+1. Edit `.github/workflows/main.yml`.
+	- Change `PACKAGE_ROOT` to your package directory.
