@@ -1,4 +1,5 @@
-name: UPM Deployment (v0.1.0)
+# Version 0.1.1
+name: UPM Deployment
 
 env:
   PACKAGE_ROOT: "<PROJECT_NAME>/Assets/<PACKAGE_NAME>"
