@@ -1,8 +1,8 @@
-# Version 0.1.1
+# Version 0.2.0
 name: UPM Deployment
 
 env:
-  PACKAGE_ROOT: "<PROJECT_NAME>/Assets/<PACKAGE_NAME>"
+  PACKAGE_ROOT: <PATH_TO_PACKAGE>
 
 on:
   push:
@@ -63,6 +63,7 @@ jobs:
           then
             goo transform hide-folder "Samples"
             goo package ignore-folder . "Samples"
+            goo transform hide-folder "Tests"
           fi
 
       - name: Deploy Package
@@ -73,3 +74,4 @@ jobs:
           FOLDER: "$PACKAGE_ROOT"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Deploy: {sha} (v${{env.VERSION}})"
+
