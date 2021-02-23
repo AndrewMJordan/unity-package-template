@@ -1,8 +1,8 @@
-# Version 0.2.0
+# Version 0.2.1
 name: UPM Deployment
 
 env:
-  PACKAGE_ROOT: <PATH_TO_PACKAGE>
+  PACKAGE_ROOT: "<PATH_TO_PACKAGE>"
 
 on:
   push:
@@ -71,7 +71,7 @@ jobs:
         env:
           REPO: self
           BRANCH: upm
-          FOLDER: "$PACKAGE_ROOT"
+          FOLDER: "\"$PACKAGE_ROOT\""
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Deploy: {sha} (v${{env.VERSION}})"
 
